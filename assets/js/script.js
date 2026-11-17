@@ -1,5 +1,6 @@
-// Mini-libreria — Settimana VII Giorno I — Versione completa
-// class, campi, extends, override, static + form che crea istanze.
+// Mini-libreria — Settimana VII Giorno II
+// Giorno I: class, campi, extends, override, static + form che crea istanze.
+// Giorno II: persistenza con localStorage (salva, carica, svuota).
 
 
 // === Classi ===
@@ -29,6 +30,13 @@ class Libro {
     const [titolo, autore, anno] = s.split("|");
     return new Libro(titolo, autore, Number(anno));
   }
+
+  // Ricrea un'istanza vera da un oggetto puro letto con JSON.parse.
+  // `this` è la classe su cui lo chiami (Libro o LibroDigitale);
+  // Object.assign copia sopra id, letto e (se c'è) dimensioneMb.
+  static fromJSON(d) {
+    return Object.assign(new this(d.titolo, d.autore, d.anno), d);
+  }
 }
 
 class LibroDigitale extends Libro {
@@ -44,9 +52,27 @@ class LibroDigitale extends Libro {
 }
 
 
+// === Persistenza (localStorage) ===
+
+const STORAGE_KEY = "libri";
+
+// localStorage salva solo stringhe: l'array diventa JSON.
+// setItem sovrascrive ogni volta l'intera chiave.
+function salvaLibri() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(libri));
+}
+
+// getItem restituisce null se la chiave non esiste: ?? "[]" fa partire da un array vuoto.
+// JSON.parse dà oggetti puri, senza metodi: li ri-istanziamo con fromJSON.
+function caricaLibri() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]")
+    .map((d) => d.dimensioneMb !== undefined ? LibroDigitale.fromJSON(d) : Libro.fromJSON(d));
+}
+
+
 // === Stato ===
 
-let libri = []; // let: l'EXTRA "Rimuovi" riassegna l'array con filter
+let libri = caricaLibri(); // let: "Rimuovi" e "Svuota tutto" riassegnano l'array
 
 
 // === Render ===
@@ -131,6 +157,7 @@ document.getElementById("aggiungi-libro").addEventListener("submit", (e) => {
     : new Libro(titolo, autore, Number(anno));
 
   libri.push(nuovo);
+  salvaLibri();
   renderLibri();
   e.target.reset(); // reset() non lancia "change": riallineiamo il campo a mano
   aggiornaCampoDimensione("cartaceo");
@@ -150,6 +177,15 @@ document.getElementById("lista-libri").addEventListener("click", (e) => {
     libri = libri.filter((l) => l.id !== id);
   }
 
+  salvaLibri();
+  renderLibri();
+});
+
+// Svuota tutto: azzera l'array e cancella solo la nostra chiave
+// (removeItem, non clear: clear toglierebbe anche altre chiavi del dominio)
+document.getElementById("svuota-tutto").addEventListener("click", () => {
+  libri = [];
+  localStorage.removeItem(STORAGE_KEY);
   renderLibri();
 });
 
