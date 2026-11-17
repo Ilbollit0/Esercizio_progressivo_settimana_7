@@ -1,4 +1,4 @@
-/* Mini-libreria — Settimana VII Giorno I */
+/* Mini-libreria — Settimana VII Giorno II */
 
 
 /* Colori in variabili: si cambiano in un punto solo */
@@ -100,6 +100,38 @@ button:focus-visible {
 
 .lista-section {
   margin-top: 28px;
+}
+
+/* Titolo a sinistra, "Svuota tutto" a destra */
+.lista-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.lista-header h2 { margin: 0; }
+
+.btn-svuota {
+  background: white;
+  color: var(--rosso);
+  border: 1px solid var(--rosso);
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-svuota:hover {
+  background: var(--rosso-chiaro);
+}
+
+.info-storage {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #777;
+  margin: 4px 0 14px;
 }
 
 .lista-libri {
