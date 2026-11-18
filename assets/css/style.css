@@ -1,4 +1,4 @@
-/* Mini-libreria — Settimana VII Giorno II */
+/* Mini-libreria — Settimana VII Giorno III */
 
 
 /* Colori in variabili: si cambiano in un punto solo */
@@ -38,6 +38,97 @@ body {
 
 .site-header h1 { margin: 0 0 8px; }
 .site-header p  { margin: 0; opacity: 0.85; }
+
+
+/* === Cerca (Open Library) === */
+
+.cerca-section {
+  background: white;
+  padding: 24px;
+  margin-top: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.cerca-section h2 { margin-top: 0; }
+
+.cerca-section label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.cerca-section input {
+  width: 100%;
+  padding: 8px;
+  font: inherit;
+  border: 1px solid var(--bordo);
+  border-radius: 4px;
+}
+
+.cerca-section input:focus-visible {
+  outline: 3px solid hsl(220, 80%, 60%);
+  outline-offset: 2px;
+}
+
+.spinner {
+  margin-top: 12px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Alert rosso per gli errori di rete/HTTP */
+.alert-danger {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--rosso);
+  border-radius: 4px;
+  background: var(--rosso-chiaro);
+  color: var(--rosso);
+}
+
+.risultati {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+
+.risultati li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.risultati .info { flex: 1; }
+.risultati .titolo { font-weight: bold; }
+
+.risultati .meta {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.risultati button {
+  background: none;
+  border: 1px solid var(--bordo);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.risultati button:hover:not(:disabled) {
+  background: var(--verde-chiaro);
+  border-color: var(--verde);
+}
+
+.risultati button:disabled {
+  color: var(--verde);
+  border-color: var(--verde);
+  cursor: default;
+}
 
 
 /* === Form === */
