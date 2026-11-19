@@ -278,11 +278,11 @@ let timeoutId; // per il debounce
 // cerca() parte solo dopo 400ms senza digitazioni.
 document.getElementById("cerca").addEventListener("input", (e) => {
   const query = e.target.value.trim();
+  clearTimeout(timeoutId); // prima del controllo: cancella anche un timer partito con una query più lunga
   if (query.length < 3) {
     document.getElementById("risultati").innerHTML = "";
     return;
   }
-  clearTimeout(timeoutId);
   timeoutId = setTimeout(() => cerca(query), 400);
 });
 
