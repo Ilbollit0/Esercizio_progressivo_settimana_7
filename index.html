@@ -3,17 +3,31 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini-libreria — Settimana VII Giorno III</title>
+    <title>Mini-libreria — Settimana VII Giorno IV</title>
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body>
 
     <header class="site-header">
-      <h1>La mia libreria</h1>
-      <p>Aggiungi i tuoi libri e segnali come letti.</p>
+      <div class="header-row">
+        <div>
+          <h1>La mia libreria</h1>
+          <p>Aggiungi i tuoi libri e segnali come letti.</p>
+        </div>
+        <div id="auth-box" class="auth-box">
+          <!-- popolato da JS: form login OPPURE saluto + logout -->
+        </div>
+      </div>
     </header>
 
     <main class="container">
+
+      <section id="profilo-section" class="profilo-section" hidden>
+        <h2>Il tuo profilo</h2>
+        <div id="profilo" class="profilo">
+          <!-- popolato da JS dopo login -->
+        </div>
+      </section>
 
       <section class="cerca-section">
         <h2>Cerca</h2>
@@ -75,6 +89,8 @@
 
     </main>
 
-    <script src="assets/js/script.js"></script>
+    <!-- type="module": scope per file, strict mode, caricamento differito.
+         Serve un server (Live Server): da file:// il browser blocca i moduli. -->
+    <script type="module" src="assets/js/main.js"></script>
   </body>
 </html>
